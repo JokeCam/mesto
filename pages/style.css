@@ -1,8 +1,8 @@
 @import url('/vendor/fonts.css');
 
 .content {
+  position: relative;
   background-color: #000000;
-  height: 100%;
   max-width: 1280px;
   margin: 0 auto;
   font-family: "Inter", Arial, sans-serif;
@@ -57,6 +57,7 @@
   color: #FFFFFF;
   font-style: normal;
   font-weight: normal;
+  flex-basis: 90%;
   font-size: 18px;
   line-height: 22px;
   margin: 0;
@@ -171,4 +172,106 @@
   font-size: 18px;
   line-height: 22px;
   color: #545454;
+}
+
+.popup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #000000;
+  background-color:rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.popup_opened {
+  display: flex;
+}
+
+.popup__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  max-width: 430px;
+  max-height: 330px;
+}
+
+.popup__title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+  margin: 34px 64px 0 36px;
+}
+
+.popup__form {
+  margin: 54px 36px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup__form__input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border: opacity 2;
+  padding: 0;
+  outline: none;
+}
+
+.popup__form__input:last-child {
+  margin-top: 30px;
+}
+
+.popup__button {
+  background: unset;
+  background-color: #000000;;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  color: none;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+  min-width: 358px;
+  min-height: 50px;
+  margin: 0 36px 36px 36px;
+  padding: 0;
+  transition: opacity 1s;
+}
+
+.popup__button:hover {
+  opacity: 0.8;
+}
+
+.popup__close {
+  cursor: pointer;
+  background: unset;
+  border: none;
+  outline: none;
+  color: none;
+  background-image: url('/images/close-Icon.png');
+  min-width: 50px;
+  min-height: 50px;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: -45px;
+  right: -40px;
+  transition: opacity 1s;
+}
+
+.popup__close:hover {
+  opacity: 0.6;
 }
