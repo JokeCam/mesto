@@ -1,10 +1,9 @@
 .popup__button {
   background: unset;
-  background-color: #000000;;
+  background-color: #000000;
   border: none;
   border-radius: 2px;
   outline: none;
-  color: none;
   background-repeat: no-repeat;
   cursor: pointer;
   font-style: normal;

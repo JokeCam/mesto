@@ -16,6 +16,6 @@
 
 @media (max-width: 500px) {
   .profile__info {
-    min-width: 300px
+    min-width: 300px;
   }
 }
