@@ -1,5 +1,5 @@
 const popup = document.querySelector('.popup');
-const buttonEdit = document.querySelector('.profile__info__button');
+const buttonEdit = document.querySelector('.profile__button');
 const buttonClose = popup.querySelector('.popup__close');
 const formElement = popup.querySelector('.popup__form');
 
@@ -21,8 +21,8 @@ buttonClose.addEventListener('click', popupClosed);
 
 // Находим форму в DOM
 
-let firstName = document.querySelector('.profile__info__title');
-let jobName = document.querySelector('.profile__info__subtitle');
+let firstName = document.querySelector('.profile__title');
+let jobName = document.querySelector('.profile__subtitle');
 
 
 
@@ -36,6 +36,7 @@ function formSubmitHandler (evt) {
 
     firstName.textContent = nameInput.value;
     jobName.textContent = jobInput.value;
+    popupClosed()
 }
 
 // Прикрепляем обработчик к форме:

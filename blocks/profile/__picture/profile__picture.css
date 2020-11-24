@@ -1,0 +1,5 @@
+.profile__picture {
+  border-radius: 50%;
+  max-height: 128px;
+  background-size: cover;
+}
