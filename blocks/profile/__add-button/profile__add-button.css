@@ -3,7 +3,7 @@
   border: none;
   outline: none;
   color: none;
-  background-image: url('/images/Add-Button.png');
+  background-image: url('../../../images/Add-Button.png');
   min-height: 50px;
   min-width: 150px;
   border-radius: 2px;
@@ -19,7 +19,7 @@
 
 @media (max-width: 900px) {
   .profile__add-button {
-    background-image: url('/images/Add-Button_L.png');
+    background-image: url('../../../images/Add-Button_L.png');
     min-width: 282px;
   }
 }
