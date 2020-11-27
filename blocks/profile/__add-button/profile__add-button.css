@@ -3,9 +3,10 @@
   border: none;
   outline: none;
   color: none;
-  background-image: url('../../../images/Add-Button.png');
-  min-height: 50px;
-  min-width: 150px;
+  background-image: url('../../../images/add-button.svg');
+  background-size: 150px 50px;
+  min-height: 51px;
+  min-width: 151px;
   border-radius: 2px;
   background-repeat: no-repeat;
   cursor: pointer;
@@ -19,7 +20,8 @@
 
 @media (max-width: 900px) {
   .profile__add-button {
-    background-image: url('../../../images/Add-Button_L.png');
+    background-image: url('../../../images/add-button-l.svg');
     min-width: 282px;
+    background-size: 282px 50px;
   }
 }

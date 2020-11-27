@@ -14,9 +14,10 @@
   color: #FFFFFF;
   min-width: 358px;
   min-height: 50px;
-  margin: 0 36px 36px 36px;
+  margin-top: 48px;
   padding: 0;
   transition: opacity 1s;
+  align-self: center;
 }
 
 .popup__button:hover {
@@ -27,6 +28,6 @@
   .popup__button {
     min-width: 238px;
     min-height: 46px;
-    margin: 0 22px 25px;
+    margin-top: 45px;
   }
 }

@@ -5,7 +5,8 @@
   color: none;
   background-repeat: no-repeat;
   cursor: pointer;
-  background-image: url('../../../images/like-button-disabled.png');
+  background-image: url('../../../images/like-button-disabled.svg');
+  background-size: 20px 18px;
   width: 20px;
   height: 18px;
   padding: 0;

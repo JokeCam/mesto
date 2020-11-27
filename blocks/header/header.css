@@ -1,5 +1,12 @@
 .header {
-  border-bottom: 1px solid #545454;
+  border-bottom: 1px solid rgb(84,84,84, 0.7);
   margin: 45px 0 0;
   min-height: 74px;
+}
+
+@media (max-width: 425px) {
+  .header {
+    margin-top: 28px;
+    min-height: 56px;
+  }
 }

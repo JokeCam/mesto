@@ -5,12 +5,10 @@
   background-color: #FFFFFF;
   border-radius: 10px;
   max-width: 430px;
-  max-height: 330px;
 }
 
 @media (max-width: 550px) {
   .popup__container {
     max-width: 282px;
-    max-height: 322px;
   }
 }
