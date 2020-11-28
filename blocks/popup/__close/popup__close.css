@@ -4,7 +4,7 @@
   border: none;
   outline: none;
   color: none;
-  background-image: url('../../../images/close-Icon.png');
+  background-image: url('../../../images/close-Icon.svg');
   min-width: 50px;
   min-height: 50px;
   background-repeat: no-repeat;
@@ -29,8 +29,11 @@
 @media (max-width: 425px) {
   .popup__close {
     background-image: url('../../../images/close-icon-s.svg');
-    background-size: 26px 26px;
+    background-size: 24px 24px;
     background-position: center;
-    right: -5px;
+    min-width: 26px;
+    min-height: 26px;
+    top: -45px;
+    right: 5px;
   }
 }

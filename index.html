@@ -15,7 +15,7 @@
       <img class="profile__picture" src="images/50cent.jpg" alt="Аватар пользователя">
       <div class="profile__info">
         <h1 class="profile__title">50 Cent</h1>
-        <button class="profile__button" type="button"></button>
+        <button aria-label="кнопка редактировать" class="profile__button" type="button"></button>
         <p class="profile__subtitle">Музыкант</p>
       </div>
       <button class="profile__add-button" type="button"></button>
@@ -54,19 +54,19 @@
     </section>
   </main>
   <footer class="footer">
-    <p class="footer__copyright">© 2020 Селюнин Станислав</p>
+    <p class="footer__copyright">&copy; 2020 Селюнин Станислав</p>
   </footer>
   <div class="popup">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" id="form" name="form">
+      <form class="popup__form" id="form" name="username">
         <input class="popup__input" value="" type="text" id="first-name" name="name_input">
         <input class="popup__input" value="" type="text" id="job-name" name="job_input">
         <button form="form" class="popup__button" type="submit" >Сохранить</button>
       </form>
-      <button class="popup__close" type="reset"></button>
+      <button class="popup__close" type="button"></button>
     </div>
   </div>
-  <script src="./java/main.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 </html>
