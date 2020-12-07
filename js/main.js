@@ -3,6 +3,9 @@ const buttonEdit = document.querySelector('.profile__button');
 const buttonClose = popup.querySelector('.popup__close');
 const formElement = popup.querySelector('.popup__form');
 
+const elementSection = document.querySelector('.elements');
+const elementTemplate = document.querySelector('.template').content;
+
 const initialCards = [
   {
       name: 'Архыз',
@@ -59,3 +62,17 @@ buttonEdit.addEventListener('click', openPopup);
 buttonClose.addEventListener('click', closePopup);
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+function renderList() {
+  const elementList = initialCards.map(composeItem);
+
+  elementSection.append(...elementList)
+}
+
+function composeItem(item) {
+  const clonedElement = elementTemplate.cloneNode(true);
+  const elementTitle = clonedElement.querySelector('.element__title').textContent = item.name;
+  const elementImage = clonedElement.querySelector('.element__image').src = item.link;
+  return clonedElement;
+}
+renderList()
