@@ -1,4 +1,4 @@
-.element__delete_button {
+.element__delete {
   height: 18px;
   width: 20px;
   outline: none;
@@ -15,6 +15,6 @@
   transition: opacity 1s;
 }
 
-.element__delete_button:hover {
+.element__delete:hover {
   opacity: 0.6;
 }
