@@ -3,6 +3,11 @@ const buttonEdit = document.querySelector('.profile__button');
 const buttonClose = popup.querySelector('.popup__close');
 const formElement = popup.querySelector('.popup__form');
 
+const popupAdd = document.querySelector('#popup-add');
+const cardAddButton = document.querySelector('.profile__add-button');
+const cardCloseAddPopup = document.querySelector('#popup__close');
+const cardCreateButton = popupAdd.querySelector('.popup__button');
+
 const elementSection = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.template').content;
 
@@ -76,3 +81,28 @@ function composeItem(item) {
   return clonedElement;
 }
 renderList()
+
+function openPopupAdd () {
+  popupAdd.classList.add('popup_opened');
+}
+
+function closePopupAdd() {
+  popupAdd.classList.remove('popup_opened');
+}
+
+cardAddButton.addEventListener('click', openPopupAdd);
+cardCloseAddPopup.addEventListener('click', closePopupAdd);
+
+let cardNameInput = document.querySelector('#card_name');
+let cardSrcInput = document.querySelector('#img_src');
+
+function createItem() {
+  const clonedElement = elementTemplate.cloneNode(true);
+  const elementTitle = clonedElement.querySelector('.element__title').textContent = cardNameInput.value;
+  const elementImage = clonedElement.querySelector('.element__image').src = cardSrcInput.value;
+  elementSection.prepend(clonedElement);
+  console.log(clonedElement);
+}
+
+cardCreateButton.addEventListener('click', createItem);
+

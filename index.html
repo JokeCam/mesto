@@ -40,11 +40,22 @@
       <button class="popup__close" type="button"></button>
     </div>
   </div>
+  <div class="popup" id="popup-add">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" id="form" name="username">
+        <input class="popup__input" value="" type="text" id="card_name" name="name_input" placeholder="Название">
+        <input class="popup__input" value="" type="text" id="img_src" name="job_input" placeholder="Ссылка на картинку">
+        <button form="form" class="popup__button" type="button">Создать</button>
+      </form>
+      <button class="popup__close" type="button" id="popup__close"></button>
+    </div>
+  </div>
   <template class="template">
     <article class="element">
       <button class="element__delete" type="button"></button>
       <button class="element__image_button">
-        <img class="element__image" src="images/pink-floyd.jpg" alt="Обложка альбома 'Pink Floyd The Wall'">
+        <img class="element__image" src="images/error.png" alt="Нету ссылки на картинку >:(">
       </button>
       <h2 class="element__title">Pink Floyd The Wall</h2>
       <button class="element__button" type="button"></button>
