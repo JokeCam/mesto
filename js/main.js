@@ -9,7 +9,7 @@ const cardCloseAddPopup = document.querySelector('#popup__close');
 const cardCreateButton = popupAdd.querySelector('.popup__button');
 
 const elementSection = document.querySelector('.elements');
-const elementTemplate = document.querySelector('.template').content;
+const elementTemplate = document.querySelector('.template').content; //card template
 
 const initialCards = [
   {
@@ -52,7 +52,7 @@ function openPopup() {
 
 function closePopup() {
   popup.classList.remove('popup_opened');
-}
+} //function closes popup
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -65,44 +65,62 @@ function formSubmitHandler (evt) {
 
 buttonEdit.addEventListener('click', openPopup);
 buttonClose.addEventListener('click', closePopup);
-
 formElement.addEventListener('submit', formSubmitHandler);
+//event listeners for edit, submit and close buttons(popup)
 
 function renderList() {
   const elementList = initialCards.map(composeItem);
 
   elementSection.append(...elementList)
-}
+}//function renders premade cards
 
 function composeItem(item) {
-  const clonedElement = elementTemplate.cloneNode(true);
-  const elementTitle = clonedElement.querySelector('.element__title').textContent = item.name;
-  const elementImage = clonedElement.querySelector('.element__image').src = item.link;
+  const clonedElement = elementTemplate.cloneNode(true); //template tag cloning
+  const elementTitle = clonedElement.querySelector('.element__title').textContent = item.name; //recieving values from input
+  const elementImage = clonedElement.querySelector('.element__image').src = item.link; //recieving values from input
+  const likeButton = clonedElement.querySelector('.element__button');
+  likeButton.addEventListener('click', function(event) {
+    event.target.classList.toggle('element__button_active'); //toggles active class for like button
+  });
+  const deleteButton = clonedElement.querySelector('.element__delete');
+  deleteButton.addEventListener('click', function(event){
+    event.target.closest('.element').remove(); //targets the button parent and removes it
+  });
   return clonedElement;
-}
-renderList()
+}//function for composing premade cards
+
+renderList() 
 
 function openPopupAdd () {
   popupAdd.classList.add('popup_opened');
-}
+}//function opens card creation popup
 
 function closePopupAdd() {
   popupAdd.classList.remove('popup_opened');
-}
+}//function closes card creation popup
 
 cardAddButton.addEventListener('click', openPopupAdd);
 cardCloseAddPopup.addEventListener('click', closePopupAdd);
+//event listeners for card creation popup
 
 let cardNameInput = document.querySelector('#card_name');
 let cardSrcInput = document.querySelector('#img_src');
 
 function createItem() {
-  const clonedElement = elementTemplate.cloneNode(true);
-  const elementTitle = clonedElement.querySelector('.element__title').textContent = cardNameInput.value;
-  const elementImage = clonedElement.querySelector('.element__image').src = cardSrcInput.value;
+  const clonedElement = elementTemplate.cloneNode(true); //template tag cloning
+  const elementTitle = clonedElement.querySelector('.element__title').textContent = cardNameInput.value; //recieving values from input
+  const elementImage = clonedElement.querySelector('.element__image').src = cardSrcInput.value; //recieving values from input
+  const likeButton = clonedElement.querySelector('.element__button');
+  likeButton.addEventListener('click', function(event) {
+    event.target.classList.toggle('element__button_active'); //toggles active class for like button
+  });
+  const deleteButton = clonedElement.querySelector('.element__delete');
+  deleteButton.addEventListener('click', function(event){
+    event.target.closest('.element').remove(); //targets the button parent and removes it
+  });
   elementSection.prepend(clonedElement);
-  console.log(clonedElement);
-}
+  closePopupAdd();
+}//function for creating custom cards
 
 cardCreateButton.addEventListener('click', createItem);
 
