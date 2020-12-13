@@ -11,6 +11,11 @@ const cardCreateButton = popupAdd.querySelector('.popup__button');
 const elementSection = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.template').content; //card template
 
+const imagePopupContainer = document.querySelector('#image-popup');
+const imagePopup = imagePopupContainer.querySelector('.popup__image');
+const imagePopupName = imagePopupContainer.querySelector('.popup__image-title');
+const imagePopupClose = imagePopupContainer.querySelector('.popup__close');
+
 const initialCards = [
   {
       name: 'Архыз',
@@ -36,7 +41,7 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-];
+]; //premade cards
 
 let nameInput = formElement.querySelector('#first-name');
 let jobInput = formElement.querySelector('#job-name');
@@ -78,6 +83,13 @@ function composeItem(item) {
   const clonedElement = elementTemplate.cloneNode(true); //template tag cloning
   const elementTitle = clonedElement.querySelector('.element__title').textContent = item.name; //recieving values from input
   const elementImage = clonedElement.querySelector('.element__image').src = item.link; //recieving values from input
+  const elementImageContainer = clonedElement.querySelector('.element__image');
+  const clonedArticleElement = clonedElement.querySelector('.element');
+  elementImageContainer.addEventListener('click', function(e){
+    imagePopupContainer.classList.add('popup_opened');
+    imagePopup.src = e.target.src;
+    imagePopupName.textContent = e.target.nextElementSibling.textContent;
+  });
   const likeButton = clonedElement.querySelector('.element__button');
   likeButton.addEventListener('click', function(event) {
     event.target.classList.toggle('element__button_active'); //toggles active class for like button
@@ -89,9 +101,9 @@ function composeItem(item) {
   return clonedElement;
 }//function for composing premade cards
 
-renderList() 
+renderList()
 
-function openPopupAdd () {
+function openPopupAdd() {
   popupAdd.classList.add('popup_opened');
 }//function opens card creation popup
 
@@ -111,6 +123,13 @@ function createItem() {
   const elementTitle = clonedElement.querySelector('.element__title').textContent = cardNameInput.value; //recieving values from input
   const elementImage = clonedElement.querySelector('.element__image').src = cardSrcInput.value; //recieving values from input
   const likeButton = clonedElement.querySelector('.element__button');
+  const elementImageContainer = clonedElement.querySelector('.element__image');
+  const clonedArticleElement = clonedElement.querySelector('.element');
+  elementImageContainer.addEventListener('click', function(e){
+    imagePopupContainer.classList.add('popup_opened');
+    imagePopup.src = e.target.src;
+    imagePopupName.textContent = e.target.nextElementSibling.textContent;
+  });
   likeButton.addEventListener('click', function(event) {
     event.target.classList.toggle('element__button_active'); //toggles active class for like button
   });
@@ -124,3 +143,8 @@ function createItem() {
 
 cardCreateButton.addEventListener('click', createItem);
 
+function closeImagePopup() {
+  imagePopupContainer.classList.remove('popup_opened');
+}
+
+imagePopupClose.addEventListener('click', closeImagePopup)

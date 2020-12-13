@@ -9,5 +9,7 @@
   background-color:rgba(0, 0, 0, 0.5);
   height: 100%;
   width: 100%;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s;
 }
