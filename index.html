@@ -29,29 +29,29 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Селюнин Станислав</p>
   </footer>
-  <div class="popup">
+  <div class="popup popup_edit">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" id="form" name="username">
-        <input class="popup__input" value="" type="text" id="first-name" name="name_input">
-        <input class="popup__input" value="" type="text" id="job-name" name="job_input">
+        <input class="popup__input" value="" type="text" id="first-name" name="name_input" required>
+        <input class="popup__input" value="" type="text" id="job-name" name="job_input" required>
         <button form="form" class="popup__button" type="submit">Сохранить</button>
       </form>
       <button class="popup__close" type="button"></button>
     </div>
   </div>
-  <div class="popup" id="popup-add">
+  <div class="popup popup_add-card">
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" id="creation-form" name="username">
-        <input class="popup__input" value="" type="text" id="card_name" name="name_input" placeholder="Название">
-        <input class="popup__input" value="" type="text" id="img_src" name="job_input" placeholder="Ссылка на картинку">
-        <button form="form" class="popup__button" type="button">Создать</button>
+        <input class="popup__input" value="" type="text" id="card_name" name="name_input" placeholder="Название" required>
+        <input class="popup__input" value="" type="text" id="img_src" name="job_input" placeholder="Ссылка на картинку" required>
+        <button class="popup__button" type="submit">Создать</button>
       </form>
-      <button class="popup__close" type="button" id="popup__close"></button>
+      <button class="popup__close" type="submit"></button>
     </div>
   </div>
-  <div class="popup" id="image-popup">
+  <div class="popup popup_image">
     <div class="popup__image-container">
       <img class="popup__image" src="#" alt="placeholder">
       <button class="popup__close" type="button"></button>

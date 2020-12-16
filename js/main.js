@@ -1,20 +1,29 @@
-const popup = document.querySelector('.popup');
+const editPopup = document.querySelector('.popup_edit');
 const buttonEdit = document.querySelector('.profile__button');
-const buttonClose = popup.querySelector('.popup__close');
-const formElement = popup.querySelector('.popup__form');
+const buttonCloseEditPopup = editPopup.querySelector('.popup__close');
+const formElementEditPopup = editPopup.querySelector('.popup__form');
 
-const popupAdd = document.querySelector('#popup-add');
+const popupAdd = document.querySelector('.popup_add-card');
 const cardAddButton = document.querySelector('.profile__add-button');
-const cardCloseAddPopup = document.querySelector('#popup__close');
+const cardCloseAddPopup = popupAdd.querySelector('.popup__close');
 const cardCreateButton = popupAdd.querySelector('.popup__button');
 
 const elementSection = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.template').content; //card template
 
-const imagePopupContainer = document.querySelector('#image-popup');
+const imagePopupContainer = document.querySelector('.popup_image');
 const imagePopup = imagePopupContainer.querySelector('.popup__image');
 const imagePopupName = imagePopupContainer.querySelector('.popup__image-title');
 const imagePopupClose = imagePopupContainer.querySelector('.popup__close');
+
+const nameInput = formElementEditPopup.querySelector('#first-name');
+const jobInput = formElementEditPopup.querySelector('#job-name');
+
+const firstName = document.querySelector('.profile__title');
+const jobName = document.querySelector('.profile__subtitle');
+
+const cardNameInput = document.querySelector('#card_name');
+const cardSrcInput = document.querySelector('#img_src');
 
 const initialCards = [
   {
@@ -43,35 +52,22 @@ const initialCards = [
   }
 ]; //premade cards
 
-let nameInput = formElement.querySelector('#first-name');
-let jobInput = formElement.querySelector('#job-name');
+function openPopup(e) {
+  e.classList.add('popup_opened');
+} //function opens popup
 
-let firstName = document.querySelector('.profile__title');
-let jobName = document.querySelector('.profile__subtitle');
-
-function openPopup() {
-  popup.classList.add('popup_opened');
-  nameInput.value = firstName.textContent;
-  jobInput.value = jobName.textContent;
-} //function opens popup and delivers current page value to inputs
-
-function closePopup() {
-  popup.classList.remove('popup_opened');
+function closePopup(e) {
+  e.classList.remove('popup_opened');
 } //function closes popup
 
-function formSubmitHandler (evt) {
+function handleProfileFormSubmit (evt) {
     evt.preventDefault();
 
     firstName.textContent = nameInput.value;
     jobName.textContent = jobInput.value;
 
-    closePopup()
+    closePopup(editPopup)
 } //function sends input values back to page and closes popup
-
-buttonEdit.addEventListener('click', openPopup);
-buttonClose.addEventListener('click', closePopup);
-formElement.addEventListener('submit', formSubmitHandler);
-//event listeners for edit, submit and close buttons(popup)
 
 function renderList() {
   const elementList = initialCards.map(composeItem);
@@ -81,14 +77,16 @@ function renderList() {
 
 function composeItem(item) {
   const clonedElement = elementTemplate.cloneNode(true); //template tag cloning
-  const elementTitle = clonedElement.querySelector('.element__title').textContent = item.name; //recieving values from input
-  const elementImage = clonedElement.querySelector('.element__image').src = item.link; //recieving values from input
-  const elementImageContainer = clonedElement.querySelector('.element__image');
-  const clonedArticleElement = clonedElement.querySelector('.element');
-  elementImageContainer.addEventListener('click', function(e){
-    imagePopupContainer.classList.add('popup_opened');
-    imagePopup.src = e.target.src;
-    imagePopupName.textContent = e.target.nextElementSibling.textContent;
+  const elementTitle = clonedElement.querySelector('.element__title'); //recieving values from input
+  elementTitle.textContent = item.name;
+  const elementImage = clonedElement.querySelector('.element__image'); //recieving values from input
+  elementImage.src = item.link;
+  elementImage.alt = item.name;
+  elementImage.addEventListener('click', function(e){
+    openPopup(imagePopupContainer);
+    imagePopup.src = item.link;
+    imagePopup.alt = item.name;
+    imagePopupName.textContent = item.name;
   });
   const likeButton = clonedElement.querySelector('.element__button');
   likeButton.addEventListener('click', function(event) {
@@ -101,8 +99,6 @@ function composeItem(item) {
   return clonedElement;
 }//function for composing premade cards
 
-renderList()
-
 function openPopupAdd() {
   popupAdd.classList.add('popup_opened');
 }//function opens card creation popup
@@ -110,13 +106,6 @@ function openPopupAdd() {
 function closePopupAdd() {
   popupAdd.classList.remove('popup_opened');
 }//function closes card creation popup
-
-cardAddButton.addEventListener('click', openPopupAdd);
-cardCloseAddPopup.addEventListener('click', closePopupAdd);
-//event listeners for card creation popup
-
-let cardNameInput = document.querySelector('#card_name');
-let cardSrcInput = document.querySelector('#img_src');
 
 function createItem() {
   const clonedElement = elementTemplate.cloneNode(true); //template tag cloning
@@ -138,13 +127,32 @@ function createItem() {
     event.target.closest('.element').remove(); //targets the button parent and removes it
   });
   elementSection.prepend(clonedElement);
-  closePopupAdd();
+  closePopup(popupAdd);
 }//function for creating custom cards
+
+renderList();
 
 cardCreateButton.addEventListener('click', createItem);
 
-function closeImagePopup() {
-  imagePopupContainer.classList.remove('popup_opened');
-}
+imagePopupClose.addEventListener('click', function() {
+  closePopup(imagePopupContainer);
+});
 
-imagePopupClose.addEventListener('click', closeImagePopup)
+buttonEdit.addEventListener('click', function() {
+  openPopup(editPopup);
+  nameInput.value = firstName.textContent;
+  jobInput.value = jobName.textContent;
+});
+buttonCloseEditPopup.addEventListener('click', function() {
+  closePopup(editPopup);
+});
+formElementEditPopup.addEventListener('submit', handleProfileFormSubmit);
+//event listeners for edit, submit and close buttons(popup)
+
+cardAddButton.addEventListener('click', function() {
+  openPopup(popupAdd);
+});
+cardCloseAddPopup.addEventListener('click', function() {
+  closePopup(popupAdd);
+});
+//event listeners for card creation popup
