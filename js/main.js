@@ -55,12 +55,12 @@ const initialCards = [
   }
 ]; //premade cards
 
-function openPopup(e) {
-  e.classList.add('popup_opened');
+function openPopup(evt) {
+  evt.classList.add('popup_opened');
 } //function opens popup
 
-function closePopup(e) {
-  e.classList.remove('popup_opened');
+function closePopup(evt) {
+  evt.classList.remove('popup_opened');
 } //function closes popup
 
 function handleProfileFormSubmit (evt) {
@@ -102,24 +102,17 @@ function composeItem(item) {
   return clonedElement;
 }//function for composing premade cards
 
-function openPopupAdd() {
-  popupAdd.classList.add('popup_opened');
-}//function opens card creation popup
-
-function closePopupAdd() {
-  popupAdd.classList.remove('popup_opened');
-}//function closes card creation popup
+function addCard(container, cardElement) {
+  container.prepend(composeItem(cardElement));  //cardElement добавляется  в container
+}
 
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
-  let customCard = [
-    {
+  const customCard = {
       name: addPopupName.value,
       link: addPopupSrc.value
-    },
-  ];
-  const customCardAdd = customCard.map(composeItem);
-  elementSection.prepend(...customCardAdd);
+    };
+  addCard(elementSection, customCard);
   addPopupName.value = '';
   addPopupSrc.value = '';
   closePopup(popupAdd);
@@ -142,7 +135,7 @@ buttonCloseEditPopup.addEventListener('click', function() {
   closePopup(editPopup);
 });
 formElementEditPopup.addEventListener('submit', handleProfileFormSubmit);
-//event listeners for edit, submit and close buttons(popup)
+//event listeners for edit, submit and close buttons
 
 cardAddButton.addEventListener('click', function() {
   openPopup(popupAdd);
