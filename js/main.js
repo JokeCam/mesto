@@ -55,12 +55,12 @@ const initialCards = [
   }
 ]; //premade cards
 
-function openPopup(evt) {
-  evt.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 } //function opens popup
 
-function closePopup(evt) {
-  evt.classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 } //function closes popup
 
 function handleProfileFormSubmit (evt) {
