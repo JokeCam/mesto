@@ -121,6 +121,7 @@ function handleAddCardSubmit(evt) {
 renderList();
 
 addPopupForm.addEventListener('submit', handleAddCardSubmit);
+//Add popup 'submit' listener
 
 imagePopupClose.addEventListener('click', function() {
   closePopup(imagePopupContainer);
