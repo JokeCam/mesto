@@ -38,6 +38,7 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEsc);
 } //function closes popup
 
 function handleEsc(event) {
