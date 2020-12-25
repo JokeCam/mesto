@@ -52,18 +52,14 @@ function enableValidation(config) {
   })
 } //starts to attach validation to all forms on page
 
-function checkProfileEditButtonValidity() {
-  if (formElementEditPopup.checkValidity()){
-    popupEditButton.classList.remove('popup__button_disabled');
-  } else {
-    popupEditButton.classList.add('popup__button_disabled');
-  }
-}; //checks if profile edit popup form is valid and toggles class for submit button
+function checkPopupValidity() {
+  const activePopup = document.querySelector('.popup_opened');
+  const activePopupForm = activePopup.querySelector('.popup__form');
+  const activePopupFormButton = activePopupForm.querySelector('.popup__button');
 
-function checkAddCardButtonValidity() {
-  if (addPopupForm.checkValidity()){
-    cardCreateButton.classList.remove('popup__button_disabled');
+  if (activePopupForm.checkValidity()){
+    activePopupFormButton.classList.remove('popup__button_disabled');
   } else {
-    cardCreateButton.classList.add('popup__button_disabled');
+    activePopupFormButton.classList.add('popup__button_disabled');
   }
-}; //checks if add card popup form is valid and toggles class for submit button
+}; //checks if active popup form is valid and toggles class for submit button

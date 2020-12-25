@@ -125,7 +125,7 @@ buttonEdit.addEventListener('click', function () {
   openPopup(editPopup);
   nameInput.value = firstName.textContent;
   jobInput.value = jobName.textContent;
-  checkProfileEditButtonValidity();
+  checkPopupValidity();
 });
 
 buttonCloseEditPopup.addEventListener('click', function () {
@@ -137,7 +137,7 @@ formElementEditPopup.addEventListener('submit', handleProfileFormSubmit);
 
 cardAddButton.addEventListener('click', function () {
   openPopup(popupAdd)
-  checkAddCardButtonValidity();
+  checkPopupValidity();
 });
 
 cardCloseAddPopup.addEventListener('click', function () {
