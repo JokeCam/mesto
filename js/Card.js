@@ -1,11 +1,12 @@
-import { openPopup } from './main.js'
+import { openPopup, imagePopupContainer, imagePopup, imagePopupName } 
+from './main.js'
 
 export class Card {
     constructor(name, src) {
         this._name = name,
         this._src = src
     }
-    _composeItem = () => {
+    composeItem = () => {
         const clonedElement = document.querySelector('.template').content.cloneNode(true); //template tag cloning
         const elementTitle = clonedElement.querySelector('.element__title'); //recieving values from input
         elementTitle.textContent = this._name;
@@ -21,15 +22,11 @@ export class Card {
     }; //function for composing cards
 
     _handlePreviewPicture = (event) => {
-        const imagePopupContainer = document.querySelector('.popup_image');
-        const imagePopup = imagePopupContainer.querySelector('.popup__image');
-        const imagePopupName = imagePopupContainer.querySelector('.popup__image-title');
-        
         openPopup(imagePopupContainer);
         imagePopup.src = event.target.src;
         imagePopup.alt = event.target.alt;
         imagePopupName.textContent = event.target.alt;
-    }   //opens image popup and copies image text, alt and src propeties
+    }  //opens image popup and copies image text, alt and src propeties
 
     _handleLikeIcon = (event) => {
         event.target.classList.toggle('element__button_active');
@@ -38,8 +35,4 @@ export class Card {
     _handleDeleteCard = (event) => {
         event.target.closest('.element').remove();
     }; //targets the button parent and removes it
-      
-    addCard = (container) => {
-        container.prepend(this._composeItem())
-    } //adds composed card into the page
 }

@@ -5,35 +5,31 @@ export class FormValidator {
     }
 
     enableValidation = (config) => {
-        const forms = document.querySelectorAll(config.formSelector);
-        forms.forEach(form => {
         this._attachFormValidityListener(form, config);
-          form.addEventListener('submit', (evt) => {
+          this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
           })
-          const submitButton = form.querySelector(config.submitButtonSelector);
-          this._setButtonState(submitButton, form.checkValidity(), config)
-        })
+          const submitButton = this._form.querySelector(this._config.submitButtonSelector);
+          this._setButtonState(submitButton, this._form.checkValidity(), config)
       } //starts to attach validation to all forms on page
 
     _attachFormValidityListener(form, config) {
-        const popupInputs = form.querySelectorAll(config.inputSelector);
-        const submitButton = form.querySelector(config.submitButtonSelector);
+        const popupInputs = this._form.querySelectorAll(this._config.inputSelector);
+        const submitButton = this._form.querySelector(this._config.submitButtonSelector);
         popupInputs.forEach(input => {
           input.addEventListener('input', (evt) => {
-      
             this._checkInputValidity(form, input, config)
-            this._setButtonState(submitButton, form.checkValidity(), config)
+            this._setButtonState(submitButton, this._form.checkValidity(), config)
           })
         })
       } //attaches validity listeners to inputs and buttons
 
     _setButtonState(button, isActive, config) {
         if (isActive) {
-          button.classList.remove(config.inactiveButtonClass)
+          button.classList.remove(this._config.inactiveButtonClass)
           button.disabled = false;
         } else {
-          button.classList.add(config.inactiveButtonClass);
+          button.classList.add(this._config.inactiveButtonClass);
           button.disabled = true;
         }
       } //sets button state depending on validity
@@ -47,14 +43,14 @@ export class FormValidator {
       } //checks if active input is valid and shows error if needed
 
     _hideError(form, input, config) {
-        const error = form.querySelector(`#${input.id}_error`);
+        const error = this._form.querySelector(`#${input.id}_error`);
         error.textContent = '';
-        input.classList.remove(config.inputErrorClass);
+        input.classList.remove(this._config.inputErrorClass);
       } //hides validation error
 
     _showError(form, input, config) {
-        const error = form.querySelector(`#${input.id}_error`);
+        const error = this._form.querySelector(`#${input.id}_error`);
         error.textContent = input.validationMessage;
-        input.classList.add(config.inputErrorClass);
+        input.classList.add(this._config.inputErrorClass);
       } //shows validation error
 }
