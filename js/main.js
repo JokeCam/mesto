@@ -62,8 +62,8 @@ function addCard (container, card) {
 function handleAddCardSubmit(evt) {
   evt.preventDefault();
   const customCard = new Card(addPopupName.value, addPopupSrc.value);
-  customCard.addCard(elementSection);
-  addPopupForm.reset();
+  addCard(elementSection, customCard);
+  addPopupForm.reset(); 
   closePopup(popupAdd);
 }; //add card popup sumbit button handler
 
