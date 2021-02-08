@@ -1,5 +1,4 @@
-import { openPopup, imagePopupContainer, imagePopup, imagePopupName } 
-from './main.js'
+import { PopupWithImage } from './PopupWithImage.js';
 
 export class Card {
     constructor(name, src) {
@@ -11,9 +10,9 @@ export class Card {
         const elementTitle = clonedElement.querySelector('.element__title'); //recieving values from input
         elementTitle.textContent = this._name;
         const elementImage = clonedElement.querySelector('.element__image'); //recieving values from input
-        elementImage.src = this._src;
+        elementImage.src = this._src; 
         elementImage.alt = this._name;
-        elementImage.addEventListener('click', this._handlePreviewPicture);
+        elementImage.addEventListener('click', this._handleCardClick);
         const likeButton = clonedElement.querySelector('.element__button');
         likeButton.addEventListener('click', this._handleLikeIcon);
         const deleteButton = clonedElement.querySelector('.element__delete');
@@ -21,12 +20,11 @@ export class Card {
         return clonedElement;
     }; //function for composing cards
 
-    _handlePreviewPicture = (event) => {
-        openPopup(imagePopupContainer);
-        imagePopup.src = event.target.src;
-        imagePopup.alt = event.target.alt;
-        imagePopupName.textContent = event.target.alt;
-    }  //opens image popup and copies image text, alt and src propeties
+    _handleCardClick = (evt) => {
+        const imagePopup = new PopupWithImage('.popup_image');
+        imagePopup.open(evt);
+        imagePopup.setEventListeners();
+    }; // image popup event listener
 
     _handleLikeIcon = (event) => {
         event.target.classList.toggle('element__button_active');

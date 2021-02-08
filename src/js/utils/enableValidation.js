@@ -5,4 +5,4 @@ const enableValidationConfig = ({
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_invalid',
   errorClass: 'popup__error_visible'
-});
+}); // config for input validation
