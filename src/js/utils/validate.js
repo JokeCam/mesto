@@ -1,4 +1,4 @@
-function checkPopupValidity() {
+export function checkPopupValidity() {
   const activePopup = document.querySelector('.popup_opened');
   const activePopupForm = activePopup.querySelector('.popup__form');
   const activePopupFormButton = activePopupForm.querySelector('.popup__button');

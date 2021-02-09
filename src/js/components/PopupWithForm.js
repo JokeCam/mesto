@@ -7,19 +7,22 @@ export class PopupWithForm extends Popup{
     }
 
     _getInputValues(){
-        const popupInputs = this._selector.querySelectorAll('.popup__input');
+        const popupInputs = document.querySelector(this._selector).querySelectorAll('.popup__input');
         popupInputs.forEach(item => {
-        }) 
+            let inputObj = {};
+            inputObj = item;
+            console.log(inputObj.textContent)
+        });
     }; // this should recieve input values but they don't have a place to go yet
 
     setEventListeners(){
-        const popupForm = this._selector.querySelector('.popup__form');
+        const popupForm = document.querySelector(this._selector).querySelector('.popup__form');
         popupForm.addEventListener('submit', this._submitCallback);
         super.setEventListeners();
     }; // attaches event listeners to the popup(close button and a custom submit button callback)
 
     close(){
-        const popupForm = this._selector.querySelector('.popup__form');
+        const popupForm = document.querySelector(this._selector).querySelector('.popup__form');
         popupForm.reset();
         super.close();
         popupForm.removeEventListener('submit', this._submitCallback);

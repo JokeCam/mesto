@@ -1,4 +1,6 @@
 export const editPopup = document.querySelector('.popup_edit');
+export const profileName = document.querySelector('.profile__title');
+export const profileAbout = document.querySelector('.profile__subtitle');
 export const buttonEdit = document.querySelector('.profile__button');
 export const formElementEditPopup = editPopup.querySelector('.popup__form');
 

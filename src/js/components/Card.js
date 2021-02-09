@@ -1,16 +1,16 @@
-import { PopupWithImage } from './PopupWithImage.js';
-
 export class Card {
-    constructor(name, src) {
-        this._name = name,
-        this._src = src
+    constructor(data, handleCardClick) {
+        this._name = data.name,
+        this._link = data.link,
+
+        this._handleCardClick = handleCardClick
     }
     composeItem = () => {
         const clonedElement = document.querySelector('.template').content.cloneNode(true); //template tag cloning
         const elementTitle = clonedElement.querySelector('.element__title'); //recieving values from input
         elementTitle.textContent = this._name;
         const elementImage = clonedElement.querySelector('.element__image'); //recieving values from input
-        elementImage.src = this._src; 
+        elementImage.src = this._link; 
         elementImage.alt = this._name;
         elementImage.addEventListener('click', this._handleCardClick);
         const likeButton = clonedElement.querySelector('.element__button');
@@ -19,12 +19,6 @@ export class Card {
         deleteButton.addEventListener('click', this._handleDeleteCard);
         return clonedElement;
     }; //function for composing cards
-
-    _handleCardClick = (evt) => {
-        const imagePopup = new PopupWithImage('.popup_image');
-        imagePopup.open(evt);
-        imagePopup.setEventListeners();
-    }; // image popup event listener
 
     _handleLikeIcon = (event) => {
         event.target.classList.toggle('element__button_active');

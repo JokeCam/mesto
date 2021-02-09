@@ -1,4 +1,4 @@
-const enableValidationConfig = ({
+export const enableValidationConfig = ({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
