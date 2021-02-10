@@ -12,15 +12,10 @@ export class UserInfo{
             name: this._username.textContent,
             job: this._infoabout.textContent
         }
-    }
+    } // recieves user info from the page
 
-    updateUserInfo(nameEdit, infoAbout){
-        this._name = nameEdit;
-        this._job = infoAbout;
-    }; // recieves user info from the page
-
-    setUserInfo(){
-        this._username.textContent = this._name;
-        this._infoabout.textContent = this._job;
+    setUserInfo(nameEdit, infoAbout){
+        this._username.textContent = nameEdit;
+        this._infoabout.textContent = infoAbout;
     }; // updates user info on the page
 }

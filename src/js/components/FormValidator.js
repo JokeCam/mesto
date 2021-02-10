@@ -1,7 +1,10 @@
 export class FormValidator {
     constructor(config, form){
         this._config = config,
-        this._form = form
+        this._form = form,
+
+        this._submitButton = this._form.querySelector(this._config.submitButtonSelector),
+        this._inputList = this._form.querySelectorAll(this._config.inputSelector)
     }
 
     enableValidation = (config) => {
@@ -9,17 +12,20 @@ export class FormValidator {
           this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
           })
-          const submitButton = this._form.querySelector(this._config.submitButtonSelector);
-          this._setButtonState(submitButton, this._form.checkValidity(), config)
+          this._setButtonState(this._submitButton, this._form.checkValidity(), config)
       } //starts to attach validation to all forms on page
 
     _attachFormValidityListener(form, config) {
-        const popupInputs = this._form.querySelectorAll(this._config.inputSelector);
-        const submitButton = this._form.querySelector(this._config.submitButtonSelector);
-        popupInputs.forEach(input => {
+      this._form.addEventListener('reset', () => {
+        this._inputList.forEach((inputElement) => {
+            this._hideError(form, inputElement, config)
+            this._setButtonState(this._submitButton);
+        })
+      });
+        this._inputList.forEach(input => {
           input.addEventListener('input', (evt) => {
             this._checkInputValidity(form, input, config)
-            this._setButtonState(submitButton, this._form.checkValidity(), config)
+            this._setButtonState(this._submitButton, this._form.checkValidity(), config)
           })
         })
       } //attaches validity listeners to inputs and buttons

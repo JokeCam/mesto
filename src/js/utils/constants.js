@@ -10,8 +10,8 @@ export const addPopupForm = popupAdd.querySelector('.popup__form');
 export const addPopupName = popupAdd.querySelector('#card__name_input');
 export const addPopupSrc = popupAdd.querySelector('#img__src_input');
 
-export const nameInput = formElementEditPopup.querySelector('input[name="name_input"]');
-export const jobInput = formElementEditPopup.querySelector('input[name="job_input"]');
+export const nameInput = formElementEditPopup.querySelector('input[name="name"]');
+export const jobInput = formElementEditPopup.querySelector('input[name="about"]');
 
 export const pageListener = document.querySelector('.content');
 

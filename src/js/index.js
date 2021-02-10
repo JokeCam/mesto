@@ -22,62 +22,45 @@ pageListener.addEventListener('mousedown', (evt) => {
 
 const info = new UserInfo(profileName, profileAbout);
 const imagePopup = new PopupWithImage('.popup_image');
+imagePopup.setEventListeners();
+const editPopup = new PopupWithForm('.popup_edit', (name) => {
+  info.setUserInfo(name.name, name.about);
+  editPopup.close(); // closes the popup and removes event listeners
+});
+editPopup.setEventListeners();  // attaches event listeners to the popup
 
 buttonEdit.addEventListener('click', function () { // event listener for the Edit profile button
-  const editPopup = new PopupWithForm('.popup_edit', (evt) => { 
-    evt.preventDefault();
-    info.updateUserInfo(nameInput.value, jobInput.value);
-    info.setUserInfo();
-    editPopup.close(); // closes the popup and removes event listeners
-  });
   nameInput.value = info.recieveUserInfo().name;
   jobInput.value = info.recieveUserInfo().job;
   editPopup.open(); // opens the popup
-  editPopup.setEventListeners(); // attaches event listeners to the popup
   checkPopupValidity();  //checks if active popup form is valid and toggles class for submit button
 });
 
+const addCardPopup = new PopupWithForm('.popup_add-card', (data) => { // new class decalration
+  createCard(data);
+  addCardPopup.close();
+});
+
+function createCard(data){
+  const newCard = new Card(data, (evt) => {
+    imagePopup.open(evt)
+  })
+  cardRender.addItem(newCard.composeItem());
+} 
+
+addCardPopup.setEventListeners(); // class PopupWithForm public method that attaches event listeners
+
 cardAddButton.addEventListener('click', function () {
-  const addCardPopup = new PopupWithForm('.popup_add-card', (evt) => { // new class decalration
-    const customCard = [ // custom card made into an object
-      {
-        name: addPopupName.value,
-        link: addPopupSrc.value
-      }
-    ];
-    evt.preventDefault(); 
-    const customCardRender = new Section ({ // new class decalration that allows for the cards to be placed onto the page
-      items: customCard, 
-      renderer: (item) => { // custom renderer function that creates new cards based on customCard(in this case)
-        const card = new Card(item, (evt) => {
-          imagePopup.open(evt);
-          imagePopup.setEventListeners();
-        });
-        const clonedElement = card.composeItem(); // class Card public method that composes a Card and attaches event listeners
-        customCardRender.addItem(clonedElement); // class Section public method that puts a Card onto the page
-      }
-    }, '.elements');
-    customCardRender.cardRenderer(); // class Section public methid that renders Cards using custom renderer function
-    addCardPopup.close();
-  });  
   addCardPopup.open(); // class PopupWithForm public method that opens the popup
-  addCardPopup.setEventListeners(); // class PopupWithForm public method that attaches event listeners
   checkPopupValidity();  //checks if active popup form is valid and toggles class for submit button
 }); // "Spaghetti Junction"
 
-const initialCardRender = new Section ({ 
-  items: initialCards, 
-  renderer: (item) => { // custom renderer function that creates new cards based on initialCards object(in this case)
-    const card = new Card(item, (evt) => {
-      imagePopup.open(evt);
-      imagePopup.setEventListeners();
-    });
-    const clonedElement = card.composeItem();
-    initialCardRender.addItem(clonedElement);
-  }
-}, '.elements'); // premade card renderer that uses Section and Card class public methods
+const cardRender = new Section ({ // new class decalration that allows for the cards to be placed onto the page
+  items: initialCards,
+  renderer: createCard
+  }, '.elements'); // card renderer  that uses createCard function
 
-initialCardRender.cardRenderer(); // renders premade cards onto the page
+cardRender.cardRenderer(); // renders cards onto the page
 
 const popupEditValidator = new FormValidator(enableValidationConfig, formElementEditPopup);
 popupEditValidator.enableValidation(); //initiates real time Edit form input validation
