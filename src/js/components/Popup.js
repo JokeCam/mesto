@@ -5,13 +5,13 @@ export class Popup {
 
     open(){
         this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose); // opens popup and attaches esc button listener
-    }
+        document.addEventListener('keydown', this._handleEscClose); 
+    } // opens popup and attaches esc button listener
 
     close(){
         this._popup.classList.remove('popup_opened');
-         // closes popup
-    }
+        document.removeEventListener('keydown', this._handleEscClose);
+    } // closes popup and removes esc button listener
 
     _handleEscClose = (event) =>{
         if (event.key === 'Escape') {

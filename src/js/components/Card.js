@@ -1,12 +1,13 @@
 export class Card {
-    constructor(data, handleCardClick) {
+    constructor(data, handleCardClick, cardTemplate) {
         this._name = data.name,
         this._link = data.link,
 
         this._handleCardClick = handleCardClick
+        this._cardTemplate = cardTemplate
     }
     composeItem = () => {
-        const clonedElement = document.querySelector('.template').content.cloneNode(true); //template tag cloning
+        const clonedElement = this._cardTemplate
         const elementTitle = clonedElement.querySelector('.element__title'); //recieving values from input
         elementTitle.textContent = this._name;
         const elementImage = clonedElement.querySelector('.element__image'); //recieving values from input

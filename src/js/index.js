@@ -8,17 +8,11 @@ import { PopupWithImage } from './components/PopupWithImage.js';
 // class imports
   
 import { profileAbout, profileName, buttonEdit, formElementEditPopup, cardAddButton, 
-  addPopupForm, addPopupName, addPopupSrc, nameInput, jobInput, pageListener} from './utils/constants.js';
+  addPopupForm, nameInput, jobInput} from './utils/constants.js';
 // constants imports
 
 import { enableValidationConfig } from './utils/enableValidation.js';
 import { initialCards } from './utils/initialCards.js';
-import { checkPopupValidity } from './utils/validate.js';
-
-pageListener.addEventListener('mousedown', (evt) => {
-  if(evt.target.classList.contains('popup_opened'))
-  evt.target.classList.remove('popup_opened');
-}) //listener for popup overlay leftclick close function
 
 const info = new UserInfo(profileName, profileAbout);
 const imagePopup = new PopupWithImage('.popup_image');
@@ -33,7 +27,6 @@ buttonEdit.addEventListener('click', function () { // event listener for the Edi
   nameInput.value = info.recieveUserInfo().name;
   jobInput.value = info.recieveUserInfo().job;
   editPopup.open(); // opens the popup
-  checkPopupValidity();  //checks if active popup form is valid and toggles class for submit button
 });
 
 const addCardPopup = new PopupWithForm('.popup_add-card', (data) => { // new class decalration
@@ -44,7 +37,7 @@ const addCardPopup = new PopupWithForm('.popup_add-card', (data) => { // new cla
 function createCard(data){
   const newCard = new Card(data, (evt) => {
     imagePopup.open(evt)
-  })
+  }, document.querySelector('.template').content.cloneNode(true))
   cardRender.addItem(newCard.composeItem());
 } 
 
@@ -52,7 +45,6 @@ addCardPopup.setEventListeners(); // class PopupWithForm public method that atta
 
 cardAddButton.addEventListener('click', function () {
   addCardPopup.open(); // class PopupWithForm public method that opens the popup
-  checkPopupValidity();  //checks if active popup form is valid and toggles class for submit button
 }); // "Spaghetti Junction"
 
 const cardRender = new Section ({ // new class decalration that allows for the cards to be placed onto the page
