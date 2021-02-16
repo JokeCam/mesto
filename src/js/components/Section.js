@@ -1,5 +1,5 @@
 export class Section {
-    constructor({ items, renderer}, selector){
+    constructor({ items, renderer }, selector){
         this._items = items,
         this._renderer = renderer,
 
@@ -7,6 +7,7 @@ export class Section {
     }
 
     cardRenderer(){
+        console.log(this._items)
         this._items.forEach((item) => {
           this._renderer(item);
         })

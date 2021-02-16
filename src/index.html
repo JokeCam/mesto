@@ -14,7 +14,10 @@
   </header>
   <main class="main">
     <section class="profile">
-      <img class="profile__picture" src="<%=require('./images/50cent.jpg')%>" alt="Аватар пользователя">
+      <div class="profile__container">
+        <button type="button" class="profile__edit-button"></button>
+        <img class="profile__picture" src="<%=require('./images/50cent.jpg')%>" alt="Аватар пользователя">
+      </div>
       <div class="profile__info">
         <h1 class="profile__title">50 Cent</h1>
         <button aria-label="кнопка редактировать" class="profile__button" type="button"></button>
@@ -62,12 +65,33 @@
       <h2 class="popup__image-title">Привет</h2>
     </div>
   </div>
+  <div class="popup popup_confirm">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+        <button class="popup__button_confirm" type="button">Да</button>
+      <button class="popup__close" type="button"></button>
+    </div>
+  </div>
+  <div class="popup popup_edit-avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" id="avatar-form" name="avatar">
+        <input class="popup__input" value="" type="url" id="avatar__name_input" name="avatar" placeholder="Ссылка на картинку" required>
+        <span class="popup__input-error" id="avatar__name_input_error"></span>
+        <button form="avatar-form" class="popup__button" type="submit">Сохранить</button>
+      </form>
+      <button class="popup__close" type="button"></button>
+    </div>
+  </div>
   <template class="template">
     <article class="element">
       <button class="element__delete" type="button"></button>
       <img class="element__image" src="images/error.png" alt="Нету ссылки на картинку >:(">
       <h2 class="element__title">Pink Floyd The Wall</h2>
-      <button class="element__button" type="button"></button>
+      <div class="element__like_container">
+        <button class="element__button" type="button"></button>
+        <p class="element__likes"></p>
+      </div>
     </article>
   </template>
 </body>

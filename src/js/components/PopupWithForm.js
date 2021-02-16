@@ -5,6 +5,8 @@ export class PopupWithForm extends Popup{
         super(selector),
         this._submitCallback = submitCallback,
 
+        this._submitButton = this._popup.querySelector('.popup__button'),
+        this._buttonText = '',
         this._form = this._popup.querySelector('.popup__form')
     }
 
@@ -15,7 +17,7 @@ export class PopupWithForm extends Popup{
         this._inputList.forEach(input => this._formValues[input.name] = input.value);
 
         return this._formValues;
-    }; // this should recieve input values but they don't have a place to go yet
+    }; 
 
     setEventListeners(){
         this._form.addEventListener('submit', (evt) => {
@@ -29,4 +31,20 @@ export class PopupWithForm extends Popup{
         this._form.reset();
         super.close();
     }; // closes popup and resets form inputs, also removes custom submit button callback
+
+    changeButtonState(){
+        this._buttonText = this._submitButton.textContent;
+        this._submitButton.textContent = 'Сохранение...';
+    }
+
+    _reverseButtonState(){
+        this._submitButton.textContent = this._buttonText;
+    }
+
+    showLoading(isLoading){
+        if(isLoading !== ''){
+            this.close();
+            this._reverseButtonState();
+        }
+    }
 }

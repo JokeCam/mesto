@@ -11,7 +11,7 @@
   height: 18px;
   padding: 0;
   transition: opacity 1s;
-  margin-right: 21px;
+  margin: 0 0 3px 0;
 }
 
 .element__button:hover {
