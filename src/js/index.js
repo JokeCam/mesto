@@ -76,8 +76,9 @@ function createCard(data){
   const newCard = new Card(data, (evt) => {
     imagePopup.open(evt)
   }, document.querySelector('.template').content.cloneNode(true),
-    () => {
+    (evt) => {
       const confirmPopup = new PopupWithConfirm('.popup_confirm', '.popup__button_confirm', () => {
+      evt.target.closest('.element').remove()
       api.deleteCard(data._id)
       confirmPopup.close()
     })
