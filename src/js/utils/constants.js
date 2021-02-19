@@ -1,9 +1,9 @@
-export const editPopup = document.querySelector('.popup_edit');
+export const editPopupElem = document.querySelector('.popup_edit');
 export const profileName = document.querySelector('.profile__title');
 export const profileAbout = document.querySelector('.profile__subtitle');
 export const profilePic = document.querySelector('.profile__picture');
 export const buttonEdit = document.querySelector('.profile__button');
-export const formElementEditPopup = editPopup.querySelector('.popup__form');
+export const formElementEditPopup = editPopupElem.querySelector('.popup__form');
 
 export const popupAdd = document.querySelector('.popup_add-card');
 export const cardAddButton = document.querySelector('.profile__add-button');
@@ -23,3 +23,9 @@ export const imagePopupName = imagePopupContainer.querySelector('.popup__image-t
 export const profileEditPicBtn = document.querySelector('.profile__edit-button');
 export const popupEditPic = document.querySelector('.popup_edit-avatar');
 export const popupEditPicForm = popupEditPic.querySelector('.popup__form');
+
+export const templateElem = document.querySelector('.template')
+export const popupAvatarElem = document.querySelector('.popup_edit-avatar');
+
+export const popupConfirmElem = document.querySelector('.popup_confirm');
+export const popupConfirmBtnElem = popupConfirmElem.querySelector('.popup__button_confirm');

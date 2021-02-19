@@ -14,6 +14,6 @@ export class Section {
     } // renders card with a custom renderer
 
     addItem(elem){
-        this._container.prepend(elem);
+        this._container.append(elem);
     } // places card onto the page
 }

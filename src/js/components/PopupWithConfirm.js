@@ -4,11 +4,12 @@ export class PopupWithConfirm extends Popup {
         super(selector)
 
         this._deleteCard = deleteCard
-        this._button = this._popup.querySelector(button);
+        this._button = button;
     }
 
-    setEventListeners(){
-        this._button.addEventListener('click', this._deleteCard);
-        super.setEventListeners()
+    deleteCardListener(evt, data){
+        this._button.addEventListener('click', () => {
+            this._deleteCard(evt, data)
+        });
     }
 }

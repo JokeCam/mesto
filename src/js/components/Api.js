@@ -3,8 +3,6 @@ export class Api {
 
     this._url = option.baseUrl
     this._headers = option.headers
-
-    this._dat
     }
 
     getUserInfo(){
@@ -12,8 +10,13 @@ export class Api {
             method: "GET",
             headers: this._headers
         })
-        .then(res => res.json())
-        .catch(err=>console.log(`Ошибка: ${err}`))
+        .then((res) => {
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
+        })
+        .then((res) => {return res})
     }
 
     getCards(){
@@ -22,9 +25,11 @@ export class Api {
             headers: this._headers
         })
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 
     updateUserInfo(data){
@@ -37,10 +42,12 @@ export class Api {
               })
         })
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
         .then(res => {console.log('Данный обновлены'); return res})
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 
     addNewCard(data){
@@ -53,10 +60,12 @@ export class Api {
               })
         })
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
         .then(res=> {console.log('Карточка добавлена'); return res})
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 
     deleteCard(id){
@@ -65,10 +74,12 @@ export class Api {
             headers: this._headers
         })
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
         .then((res) => console.log(res))
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 
     addLike(id){
@@ -77,10 +88,12 @@ export class Api {
             headers: this._headers
         })  
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
         .then((res) => {console.log('Лайк оставлен'); return res})
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 
     removeLike(id){
@@ -89,10 +102,12 @@ export class Api {
             headers: this._headers
         })  
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
         .then((res) => {console.log('Лайк убран'); return res})
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 
     updateUserAvatar(url){
@@ -104,9 +119,11 @@ export class Api {
               })
         })
         .then((res) => {
-            return res.json();
+            if (res.ok){
+                return res.json()
+            }
+            return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
         .then((res) => {console.log('Аватар обновлён'); return res})
-        .catch(err=>console.log(`Ошибка: ${err}`))
     }
 }

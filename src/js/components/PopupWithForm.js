@@ -44,7 +44,7 @@ export class PopupWithForm extends Popup{
     showLoading(isLoading){
         if(isLoading !== ''){
             this.close();
-            this._reverseButtonState();
+            // this._reverseButtonState();
         }
     }
 }

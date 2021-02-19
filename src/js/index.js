@@ -7,11 +7,11 @@ import { UserInfo } from './components/UserInfo.js';
 import { PopupWithImage } from './components/PopupWithImage.js';
 import { Api } from './components/Api.js';
 import { PopupWithConfirm } from './components/PopupWithConfirm.js'
-import { PopupWithOneFormInput } from './components/PopupWithOneFormInput.js';
 // class imports
   
 import { profilePic, profileAbout, profileName, buttonEdit, formElementEditPopup, cardAddButton, 
-  addPopupForm, nameInput, jobInput, popupEditPicForm, profileEditPicBtn, popupEditPic} from './utils/constants.js';
+  addPopupForm, nameInput, jobInput, popupEditPicForm, profileEditPicBtn, templateElem, editPopupElem,
+  imagePopupContainer, popupAdd, popupAvatarElem, popupConfirmElem, popupConfirmBtnElem} from './utils/constants.js';
 // constants imports
 
 import { enableValidationConfig } from './utils/enableValidation.js';
@@ -28,17 +28,19 @@ api.getUserInfo()
   .then((res) => {
     info.setUserInfo(res.name, res.about);
     info.setUserAvatar(res.avatar);
-})
+  })
+  .catch(err=>console.log(`Ошибка: ${err}`))
 
 const info = new UserInfo(profileName, profileAbout, profilePic);
-const imagePopup = new PopupWithImage('.popup_image');
+const imagePopup = new PopupWithImage(imagePopupContainer);
 imagePopup.setEventListeners();
-const editPopup = new PopupWithForm('.popup_edit', (name) => {
+const editPopup = new PopupWithForm(editPopupElem, (name) => {
   editPopup.changeButtonState();
   api.updateUserInfo(name)
     .then((res) => {
       editPopup.showLoading(res)
     })
+    .catch(err=>console.log(`Ошибка: ${err}`))
   info.setUserInfo(name.name, name.about);
 });
 editPopup.setEventListeners();  // attaches event listeners to the popup
@@ -49,22 +51,24 @@ buttonEdit.addEventListener('click', function () { // event listener for the Edi
   editPopup.open(); // opens the popup
 });
 
-const addCardPopup = new PopupWithForm('.popup_add-card', (data) => { // new class decalration
+const addCardPopup = new PopupWithForm(popupAdd, (data) => { // new class decalration
   addCardPopup.changeButtonState();
   api.addNewCard(data)
     .then((res) => {
       addCardPopup.showLoading(res);
       createCard(res);  
     })
+    .catch(err=>console.log(`Ошибка: ${err}`))
 });
 
-const popupEditPicture = new PopupWithOneFormInput('.popup_edit-avatar', (link) => {
+const popupEditPicture = new PopupWithForm(popupAvatarElem, (link) => {
   popupEditPicture.changeButtonState();
-  api.updateUserAvatar(link)
+  api.updateUserAvatar(link.avatar)
     .then((res) => {
       popupEditPicture.showLoading(res);
     })
-  info.setUserAvatar(link);
+    .catch(err=>console.log(`Ошибка: ${err}`))
+  info.setUserAvatar(link.avatar);
 })
 popupEditPicture.setEventListeners();
 
@@ -72,26 +76,33 @@ profileEditPicBtn.addEventListener('click', () => {
   popupEditPicture.open();
 });
 
+const confirmPopup = new PopupWithConfirm(popupConfirmElem, popupConfirmBtnElem, (evt, data) => {
+  evt.target.closest('.element').remove();
+  api.deleteCard(data._id)
+  .catch(err=>console.log(`Ошибка: ${err}`))
+  confirmPopup.close()
+})
+confirmPopup.setEventListeners();
+
 function createCard(data){  
   const newCard = new Card(data, (evt) => {
     imagePopup.open(evt)
-  }, document.querySelector('.template').content.cloneNode(true),
+  }, templateElem.content.cloneNode(true),
     (evt) => {
-      const confirmPopup = new PopupWithConfirm('.popup_confirm', '.popup__button_confirm', () => {
-      evt.target.closest('.element').remove()
-      api.deleteCard(data._id)
-      confirmPopup.close()
-    })
-      confirmPopup.setEventListeners();
-      confirmPopup.open()},
+      confirmPopup.open();
+      confirmPopup.deleteCardListener(evt, data);
+    },
      (evt) => {if(evt.target.classList.contains('element__button_active')){
       api.removeLike(data._id).then((res) =>
-      evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length),
+      evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length)
+      .catch(err=>console.log(`Ошибка: ${err}`)),
       evt.target.classList.remove('element__button_active')}
       else api.addLike(data._id).then((res) =>
-      evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length),
+      evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length)
+      .catch(err=>console.log(`Ошибка: ${err}`)),
       evt.target.classList.add('element__button_active');
-     })
+     },api.getUserInfo().then((res) => {return res})
+     .catch(err=>console.log(`Ошибка: ${err}`)))
   cardRender.addItem(newCard.composeItem());
 }
 
@@ -107,6 +118,7 @@ api.getCards()
       createCard(item)
     })
   })
+  .catch(err=>console.log(`Ошибка: ${err}`))
 
 const cardRender = new Section ({ // new class decalration that allows for the cards to be placed onto the page
   renderer: createCard

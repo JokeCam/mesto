@@ -3,24 +3,28 @@ export class UserInfo{
         this._username = username,
         this._infoabout = infoabout,
         this._profileimage = profileimage
-
-        this._name = '',
-        this._job = ''
     };
 
     recieveUserInfo(){
         return {
             name: this._username.textContent,
-            job: this._infoabout.textContent
+            job: this._infoabout.textContent,
+            avatar: this._profileimage.src
         }
     } // recieves user info from the page
 
     setUserInfo(nameEdit, infoAbout){
+        if(nameEdit, infoAbout !== 'undefined'){
         this._username.textContent = nameEdit;
         this._infoabout.textContent = infoAbout;
+        }
+        return 'Ошибка'
     }; // updates user info on the page
 
     setUserAvatar(picture){
+        if(picture !== 'undefined'){
         this._profileimage.src = picture;
+        }
+        return 'Ошибка'
     }
 }
