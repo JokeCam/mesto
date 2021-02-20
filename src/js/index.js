@@ -24,10 +24,13 @@ const api = new Api({
   }
 });
 
+const userId = {myId: ''}
+
 api.getUserInfo()
   .then((res) => {
     info.setUserInfo(res.name, res.about);
     info.setUserAvatar(res.avatar);
+    userId.myId = res._id
   })
   .catch(err=>console.log(`Ошибка: ${err}`))
 
@@ -101,8 +104,7 @@ function createCard(data){
       evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length)
       .catch(err=>console.log(`Ошибка: ${err}`)),
       evt.target.classList.add('element__button_active');
-     },api.getUserInfo().then((res) => {return res})
-     .catch(err=>console.log(`Ошибка: ${err}`)))
+     },userId)
   cardRender.addItem(newCard.composeItem());
 }
 

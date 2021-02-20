@@ -14,7 +14,7 @@ export class UserInfo{
     } // recieves user info from the page
 
     setUserInfo(nameEdit, infoAbout){
-        if(nameEdit, infoAbout !== 'undefined'){
+        if(nameEdit, infoAbout){
         this._username.textContent = nameEdit;
         this._infoabout.textContent = infoAbout;
         }
@@ -22,7 +22,7 @@ export class UserInfo{
     }; // updates user info on the page
 
     setUserAvatar(picture){
-        if(picture !== 'undefined'){
+        if(picture){
         this._profileimage.src = picture;
         }
         return 'Ошибка'

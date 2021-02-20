@@ -16,7 +16,6 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then((res) => {return res})
     }
 
     getCards(){
@@ -47,7 +46,6 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then(res => {console.log('Данный обновлены'); return res})
     }
 
     addNewCard(data){
@@ -65,7 +63,6 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then(res=> {console.log('Карточка добавлена'); return res})
     }
 
     deleteCard(id){
@@ -79,7 +76,6 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then((res) => console.log(res))
     }
 
     addLike(id){
@@ -93,7 +89,6 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then((res) => {console.log('Лайк оставлен'); return res})
     }
 
     removeLike(id){
@@ -107,7 +102,6 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then((res) => {console.log('Лайк убран'); return res})
     }
 
     updateUserAvatar(url){
@@ -124,6 +118,5 @@ export class Api {
             }
             return Promise.reject(`Что-то пошло не так: ${res.status}`);
         })
-        .then((res) => {console.log('Аватар обновлён'); return res})
     }
 }

@@ -1,11 +1,11 @@
 export class Card {
-    constructor(data, handleCardClick, cardTemplate, handleDeleteCard, handleLikeButton, ownerData) {
+    constructor(data, handleCardClick, cardTemplate, handleDeleteCard, handleLikeButton, userId) {
         this._name = data.name,
         this._link = data.link,
         this._likes = data.likes,
         this._owner = data.owner,
         this._likes.forEach((item) => this._likesId = item._id),
-        this._ownerData = ownerData,
+        this._userId = userId,
 
         this._handleDeleteCard = handleDeleteCard,
         this._handleCardClick = handleCardClick,
@@ -21,14 +21,12 @@ export class Card {
         elementImage.alt = this._name;
         const likeButton = clonedElement.querySelector('.element__button');
         const deleteButton = clonedElement.querySelector('.element__delete');
-        this._ownerData.then((res) => {
-        if(this._likesId == res._id){
+        if(this._likesId === this._userId.myId){
             likeButton.classList.add('element__button_active');
         }
-        if(this._owner._id !== res._id){
+        if(this._owner._id !== this._userId.myId){
             deleteButton.classList.add('element__delete_hidden')
         }
-        })
         const likes = clonedElement.querySelector('.element__likes');
         likes.textContent = `${this._likes.length}`
         this._setEventListeners(elementImage, likeButton, deleteButton);
