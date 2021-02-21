@@ -31,20 +31,4 @@ export class PopupWithForm extends Popup{
         this._form.reset();
         super.close();
     }; // closes popup and resets form inputs, also removes custom submit button callback
-
-    changeButtonState(){
-        this._buttonText = this._submitButton.textContent;
-        this._submitButton.textContent = 'Сохранение...';
-    }
-
-    _reverseButtonState(){
-        this._submitButton.textContent = this._buttonText;
-    }
-
-    showLoading(isLoading){
-        if(isLoading !== ''){
-            this.close();
-            // this._reverseButtonState();
-        }
-    }
 }

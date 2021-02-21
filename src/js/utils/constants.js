@@ -4,6 +4,7 @@ export const profileAbout = document.querySelector('.profile__subtitle');
 export const profilePic = document.querySelector('.profile__picture');
 export const buttonEdit = document.querySelector('.profile__button');
 export const formElementEditPopup = editPopupElem.querySelector('.popup__form');
+export const editProfileSubmitBtn = editPopupElem.querySelector('.popup__button');
 
 export const popupAdd = document.querySelector('.popup_add-card');
 export const cardAddButton = document.querySelector('.profile__add-button');
@@ -29,3 +30,11 @@ export const popupAvatarElem = document.querySelector('.popup_edit-avatar');
 
 export const popupConfirmElem = document.querySelector('.popup_confirm');
 export const popupConfirmBtnElem = popupConfirmElem.querySelector('.popup__button_confirm');
+
+export function buttonLoadingHandler(isLoading, button){
+    let text
+    text = button.textContent
+    if(isLoading){
+        button.textContent = 'Сохранение...'
+    } else {button.textContent = text}
+}

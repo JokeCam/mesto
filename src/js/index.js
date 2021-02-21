@@ -16,6 +16,8 @@ import { profilePic, profileAbout, profileName, buttonEdit, formElementEditPopup
 
 import { enableValidationConfig } from './utils/enableValidation.js';
 
+import { renderLoading } from './utils/renderLoading.js';
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
   headers: {
@@ -38,12 +40,13 @@ const info = new UserInfo(profileName, profileAbout, profilePic);
 const imagePopup = new PopupWithImage(imagePopupContainer);
 imagePopup.setEventListeners();
 const editPopup = new PopupWithForm(editPopupElem, (name) => {
-  editPopup.changeButtonState();
+  renderLoading(true)
   api.updateUserInfo(name)
-    .then((res) => {
-      editPopup.showLoading(res)
-    })
     .catch(err=>console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      renderLoading();
+      editPopup.close()
+    })
   info.setUserInfo(name.name, name.about);
 });
 editPopup.setEventListeners();  // attaches event listeners to the popup
@@ -55,22 +58,26 @@ buttonEdit.addEventListener('click', function () { // event listener for the Edi
 });
 
 const addCardPopup = new PopupWithForm(popupAdd, (data) => { // new class decalration
-  addCardPopup.changeButtonState();
+  renderLoading(true);
   api.addNewCard(data)
     .then((res) => {
-      addCardPopup.showLoading(res);
-      createCard(res);  
+      cardRender.addItem(createCard(res), true);  
     })
     .catch(err=>console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      renderLoading();
+      addCardPopup.close();
+    })
 });
 
 const popupEditPicture = new PopupWithForm(popupAvatarElem, (link) => {
-  popupEditPicture.changeButtonState();
+  renderLoading(true);
   api.updateUserAvatar(link.avatar)
-    .then((res) => {
-      popupEditPicture.showLoading(res);
-    })
     .catch(err=>console.log(`Ошибка: ${err}`))
+    .finally(() => {
+      renderLoading();
+      popupEditPicture.close();
+    })
   info.setUserAvatar(link.avatar);
 })
 popupEditPicture.setEventListeners();
@@ -105,19 +112,19 @@ function createCard(data){
       .catch(err=>console.log(`Ошибка: ${err}`)),
       evt.target.classList.add('element__button_active');
      },userId)
-  cardRender.addItem(newCard.composeItem());
+  return newCard.composeItem();
 }
 
 addCardPopup.setEventListeners(); // class PopupWithForm public method that attaches event listeners
 
 cardAddButton.addEventListener('click', function () {
   addCardPopup.open(); // class PopupWithForm public method that opens the popup
-}); // "Spaghetti Junction"
+});
 
 api.getCards()
   .then((data) => {
     data.forEach((item) => {
-      createCard(item)
+      cardRender.addItem(createCard(item))
     })
   })
   .catch(err=>console.log(`Ошибка: ${err}`))

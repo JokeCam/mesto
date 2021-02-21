@@ -7,13 +7,14 @@ export class Section {
     }
 
     cardRenderer(){
-        console.log(this._items)
         this._items.forEach((item) => {
           this._renderer(item);
         })
     } // renders card with a custom renderer
 
-    addItem(elem){
-        this._container.append(elem);
+    addItem(elem, before = false){
+        if(before){
+        this._container.prepend(elem);
+        } else this._container.append(elem)
     } // places card onto the page
 }
