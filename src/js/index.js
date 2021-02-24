@@ -11,12 +11,24 @@ import { PopupWithConfirm } from './components/PopupWithConfirm.js'
   
 import { profilePic, profileAbout, profileName, buttonEdit, formElementEditPopup, cardAddButton, 
   addPopupForm, nameInput, jobInput, popupEditPicForm, profileEditPicBtn, templateElem, editPopupElem,
-  imagePopupContainer, popupAdd, popupAvatarElem, popupConfirmElem, popupConfirmBtnElem} from './utils/constants.js';
+  imagePopupContainer, popupAdd, popupAvatarElem, popupConfirmElem, popupConfirmBtnElem, elements} from './utils/constants.js';
 // constants imports
 
 import { enableValidationConfig } from './utils/enableValidation.js';
 
-import { renderLoading } from './utils/renderLoading.js';
+import { renderLoading, closestLike } from './utils/utils.js';
+
+function cardLikeHnadler(evt, data){
+  if(evt.target.classList.contains('element__button_active')){
+  api.removeLike(data._id).then((res) =>
+  closestLike(evt).textContent = res.likes.length)
+  .catch(err=>console.log(`Ошибка: ${err}`)),
+  evt.target.classList.remove('element__button_active')}
+  else api.addLike(data._id).then((res) =>
+  closestLike(evt).textContent = res.likes.length)
+  .catch(err=>console.log(`Ошибка: ${err}`)),
+  evt.target.classList.add('element__button_active');
+ }
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20',
@@ -28,13 +40,31 @@ const api = new Api({
 
 const userId = {myId: ''}
 
-api.getUserInfo()
+const userInfoPromise = new Promise(() => {
+  api.getUserInfo()
   .then((res) => {
     info.setUserInfo(res.name, res.about);
     info.setUserAvatar(res.avatar);
     userId.myId = res._id
   })
   .catch(err=>console.log(`Ошибка: ${err}`))
+});
+
+const cardPromise = new Promise(() => {
+  api.getCards()
+  .then((data) => {
+    data.forEach((item) => {
+      cardRender.addItem(createCard(item))
+    })
+  })
+  .catch(err=>console.log(`Ошибка: ${err}`))
+});
+
+Promise.all([userInfoPromise, cardPromise])
+  .then((res, err) => {
+  console.log(res);
+  console.log(err);
+});
 
 const info = new UserInfo(profileName, profileAbout, profilePic);
 const imagePopup = new PopupWithImage(imagePopupContainer);
@@ -102,16 +132,7 @@ function createCard(data){
       confirmPopup.open();
       confirmPopup.deleteCardListener(evt, data);
     },
-     (evt) => {if(evt.target.classList.contains('element__button_active')){
-      api.removeLike(data._id).then((res) =>
-      evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length)
-      .catch(err=>console.log(`Ошибка: ${err}`)),
-      evt.target.classList.remove('element__button_active')}
-      else api.addLike(data._id).then((res) =>
-      evt.target.closest('.element__like_container').querySelector('.element__likes').textContent = res.likes.length)
-      .catch(err=>console.log(`Ошибка: ${err}`)),
-      evt.target.classList.add('element__button_active');
-     },userId)
+     (evt) => cardLikeHnadler(evt, data),userId)
   return newCard.composeItem();
 }
 
@@ -121,17 +142,9 @@ cardAddButton.addEventListener('click', function () {
   addCardPopup.open(); // class PopupWithForm public method that opens the popup
 });
 
-api.getCards()
-  .then((data) => {
-    data.forEach((item) => {
-      cardRender.addItem(createCard(item))
-    })
-  })
-  .catch(err=>console.log(`Ошибка: ${err}`))
-
 const cardRender = new Section ({ // new class decalration that allows for the cards to be placed onto the page
   renderer: createCard
-  }, '.elements'); // card renderer  that uses createCard function
+  }, elements); // card renderer  that uses createCard function
 
 const popupEditValidator = new FormValidator(enableValidationConfig, formElementEditPopup);
 popupEditValidator.enableValidation(); //initiates real time Edit form input validation

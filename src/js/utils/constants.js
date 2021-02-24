@@ -30,11 +30,4 @@ export const popupAvatarElem = document.querySelector('.popup_edit-avatar');
 
 export const popupConfirmElem = document.querySelector('.popup_confirm');
 export const popupConfirmBtnElem = popupConfirmElem.querySelector('.popup__button_confirm');
-
-export function buttonLoadingHandler(isLoading, button){
-    let text
-    text = button.textContent
-    if(isLoading){
-        button.textContent = 'Сохранение...'
-    } else {button.textContent = text}
-}
+export const elements = document.querySelector('.elements');

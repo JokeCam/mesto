@@ -3,7 +3,7 @@ export class Section {
         this._items = items,
         this._renderer = renderer,
 
-        this._container = document.querySelector(selector)
+        this._container = selector
     }
 
     cardRenderer(){

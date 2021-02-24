@@ -6,7 +6,6 @@ export class PopupWithForm extends Popup{
         this._submitCallback = submitCallback,
 
         this._submitButton = this._popup.querySelector('.popup__button'),
-        this._buttonText = '',
         this._form = this._popup.querySelector('.popup__form')
     }
 

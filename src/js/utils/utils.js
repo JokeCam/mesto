@@ -6,3 +6,7 @@ export function renderLoading(isLoading = false){
     }
     currentActiveButton.textContent = 'Сохранить';
   };
+
+  export function closestLike(evt){
+    return evt.target.closest('.element__like_container').querySelector('.element__likes');
+  }
