@@ -4,7 +4,7 @@
 
 В проекте испульзуются grid для создания адаптивной вёрстки, а также ООП Javascript
 
-## Project allows you to change your name, profession and also to add cards with name and a picture
+## Project allows you to change your name, profession and also to add cards with a name and a picture
 
 It uses grid to create adaptive layout and OOP Javascript
 
